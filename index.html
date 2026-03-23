@@ -88,7 +88,17 @@
         .prompt-meta {
             color: #888;
             font-size: 0.9em;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
+        }
+        .prompt-meta .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 4px;
+            font-size: 0.85em;
+        }
+        .prompt-meta .meta-icon {
+            font-size: 1.1em;
         }
         .prompt-preview {
             color: #ccc;
@@ -216,7 +226,18 @@
             <h2 id="modalTitle"></h2>
             <div class="modal-meta">
                 <h3>📱 Post Info</h3>
-                <p><strong>Legenda sugerida:</strong> <span id="modalPostTitle"></span></p>
+                <div class="meta-item">
+                    <span class="meta-icon">🕐</span>
+                    <span><strong>TikTok:</strong> <span id="modalTikTokTime"></span> (horário recomendado)</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-icon">🎬</span>
+                    <span><strong>Cenário:</strong> <span id="modalScene"></span></span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-icon">📝</span>
+                    <span><strong>Legenda:</strong> <span id="modalPostTitle"></span></span>
+                </div>
                 <div style="margin-top: 8px;"><strong>Hashtags:</strong> <span id="modalHashtags"></span></div>
                 <button class="copy-btn" onclick="copyPostInfo()">📋 Copiar legenda + hashtags</button>
             </div>
@@ -255,7 +276,9 @@ Format: Vertical 9:16, no audio.
 This is PART 1 of 2.`,
                     metadata: {
                         postTitle: "Someone You Loved - Lewis Capaldi (piano cover) [Parte 1/2] 🖤 #jhenn",
-                        hashtags: "#jhenn #someonouloved #lewiscapaldi #pianocover #gothic #emotional #fyp"
+                        hashtags: "#jhenn #someonouloved #lewiscapaldi #pianocover #gothic #emotional #fyp",
+                        tiktok_time: "19:30",
+                        scene: "Modern outdoor night environment, subtle distant lights blurred in the background"
                     }
                 },
                 {
@@ -284,7 +307,9 @@ Format: Vertical 9:16, no audio.
 This is PART 2 of 2.`,
                     metadata: {
                         postTitle: "Someone You Loved - Lewis Capaldi (piano cover) [Parte 2/2] 🖤 #jhenn",
-                        hashtags: "#jhenn #someonouloved #lewiscapaldi #pianocover #gothic #emotional #fyp"
+                        hashtags: "#jhenn #someonouloved #lewiscapaldi #pianocover #gothic #emotional #fyp",
+                        tiktok_time: "19:30",
+                        scene: "Modern outdoor night environment, subtle distant lights blurred in the background"
                     }
                 }
             ]
@@ -318,7 +343,17 @@ This is PART 2 of 2.`,
                 card.innerHTML = `
                     <div class="prompt-title">${prompt.title}</div>
                     <div class="prompt-meta">
-                        ${prompt.tags.map(t => `<span class="tag">${t}</span>`).join(' ')}
+                        <div class="meta-item">
+                            <span class="meta-icon">🕐</span>
+                            <span>TikTok: ${prompt.metadata.tiktok_time || '19:00-20:00'}</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-icon">🎬</span>
+                            <span>Cenário: ${prompt.metadata.scene || 'Gothic cathedral'}</span>
+                        </div>
+                        <div>
+                            ${prompt.tags.map(t => `<span class="tag">${t}</span>`).join(' ')}
+                        </div>
                     </div>
                     <div class="prompt-preview">${prompt.preview}</div>
                 `;
@@ -334,6 +369,11 @@ This is PART 2 of 2.`,
             document.getElementById('modalTitle').textContent = prompt.title;
             document.getElementById('modalPostTitle').textContent = prompt.metadata.postTitle;
             document.getElementById('modalHashtags').textContent = prompt.metadata.hashtags;
+            // Novos campos
+            const timeEl = document.getElementById('modalTikTokTime');
+            if (timeEl) timeEl.textContent = prompt.metadata.tiktok_time || '19:00-20:00 (padrão)';
+            const sceneEl = document.getElementById('modalScene');
+            if (sceneEl) sceneEl.textContent = prompt.metadata.scene || 'Gothic cathedral, candlelight';
             document.getElementById('modalBody').textContent = prompt.content;
             document.getElementById('promptModal').style.display = 'block';
         }
