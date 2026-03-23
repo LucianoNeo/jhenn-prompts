@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jhenn - Prompts VEO3</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #ff6b9d;
+            text-shadow: 0 0 20px rgba(255,107,157,0.5);
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #a0a0a0;
+            font-size: 1.1em;
+        }
+        .day-section {
+            margin-bottom: 50px;
+        }
+        .day-header {
+            color: #c44dff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(196,77,255,0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .day-header::before {
+            content: '📅';
+        }
+        .prompt-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+        .prompt-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .prompt-card:hover {
+            transform: translateY(-5px);
+            border-color: #ff6b9d;
+            box-shadow: 0 10px 30px rgba(255,107,157,0.2);
+        }
+        .prompt-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px; height: 100%;
+            background: linear-gradient(to bottom, #ff6b9d, #c44dff);
+        }
+        .prompt-title {
+            color: #ff6b9d;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        .prompt-meta {
+            color: #888;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+        .prompt-preview {
+            color: #ccc;
+            line-height: 1.6;
+            max-height: 120px;
+            overflow: hidden;
+            position: relative;
+        }
+        .prompt-preview::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background: linear-gradient(transparent, rgba(26,26,46,0.9));
+        }
+        .read-more {
+            color: #ff6b9d;
+            font-weight: 600;
+            margin-top: 10px;
+            display: inline-block;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .modal-content {
+            background: #1a1a2e;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            position: relative;
+        }
+        .close-modal {
+            position: absolute;
+            top: 15px; right: 20px;
+            font-size: 2em;
+            color: #888;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .close-modal:hover { color: #ff6b9d; }
+        .modal h2 {
+            color: #ff6b9d;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        .modal-meta {
+            background: rgba(255,107,157,0.1);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-left: 4px solid #ff6b9d;
+        }
+        .modal-meta h3 {
+            color: #ff6b9d;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        .modal-meta p {
+            margin: 5px 0;
+            color: #ffb3c6;
+            font-size: 1.05em;
+        }
+        .modal-body {
+            line-height: 1.8;
+            color: #d0d0d0;
+            white-space: pre-wrap;
+            font-family: 'Consolas', monospace;
+            background: rgba(0,0,0,0.3);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.05);
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 40px;
+        }
+        .tag {
+            display: inline-block;
+            background: rgba(255,107,157,0.2);
+            color: #ff6b9d;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+        .copy-btn {
+            background: rgba(255,107,157,0.2);
+            color: #ff6b9d;
+            border: 1px solid rgba(255,107,157,0.4);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-top: 10px;
+            transition: all 0.2s;
+        }
+        .copy-btn:hover {
+            background: rgba(255,107,157,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎬 Jhenn - VEO3 Prompts</h1>
+            <p class="subtitle">Prompts cinematográficos para vídeos do TikTok</p>
+        </header>
+
+        <div class="day-section" id="daysContainer"></div>
+
+        <footer>
+            <p>Use os prompts no VEO3 ou CapCut. Formato: 9:16, 8s cada.</p>
+        </footer>
+    </div>
+
+    <div class="modal" id="promptModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <div class="modal-meta">
+                <h3>📱 Post Info</h3>
+                <p><strong>Legenda sugerida:</strong> <span id="modalPostTitle"></span></p>
+                <div style="margin-top: 8px;"><strong>Hashtags:</strong> <span id="modalHashtags"></span></div>
+                <button class="copy-btn" onclick="copyPostInfo()">📋 Copiar legenda + hashtags</button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        const promptsByDay = {
+            "2026-03-23": [
+                {
+                    id: 'taking_over_me_1',
+                    title: 'Taking Over Me - Prompt 1 (Verse)',
+                    tags: ['Evanescence', 'Taking Over Me', 'Piano Cover'],
+                    preview: 'A gothic dark fantasy female pianist named Jhenn, long dark purple hair... Close-up of hands playing piano in a dark cathedral...',
+                    content: `## VEO3 Prompt - Taking Over Me (Parte 1)
+
+A gothic dark fantasy female pianist named Jhenn, long dark purple hair cascading over her shoulders, pale skin, minimal gothic makeup (black lipstick, dark eyeshadow), wearing a simple tight black long-sleeve top.
+
+Close-up of her hands playing a grand piano in a dark cathedral. The camera focuses on her slender fingers gliding over the ivory keys, playing the delicate arpeggios of "Taking Over Me". Soft candlelight flickers on the keys, creating warm highlights on black & white. Gothic stone arches visible in the shallow depth-of-field background.
+
+Slight camera shift to the right, revealing part of her face in shadow — her eyes closed, fully immersed in the music. Subtle head movement following the melody.
+
+Same dark minimal environment, almost black background with only candlelight illumination. Soft side lighting in cool blue tone illuminates part of her face and hands, creating contrast with warm candle.
+
+Emotional expression: serene, melancholic, lost in the music. Ultra realistic skin texture, detailed piano keys, natural lighting, 4k resolution.
+
+No talking, no singing, no movement beyond playing and subtle head tilt. Intimate handheld camera feel, breathing room.
+
+Duration: ~8 seconds.
+Format: Vertical 9:16, no audio.`,
+                    metadata: {
+                        postTitle: "Taking Over Me - Evanescence (piano cover) #jhenn",
+                        hashtags: "#jhenn #evanescence #takingoverme #piano #metal #fyp"
+                    }
+                },
+                {
+                    id: 'taking_over_me_2',
+                    title: 'Taking Over Me - Prompt 2 (Chorus)',
+                    tags: ['Evanescence', 'Taking Over Me', 'Piano Cover'],
+                    preview: 'Same gothic dark fantasy female pianist Jhenn, now playing the powerful chorus... Close-up but slightly wider shot...',
+                    content: `## VEO3 Prompt - Taking Over Me (Parte 2)
+
+Same gothic dark fantasy female pianist Jhenn, now playing the powerful chorus of "Taking Over Me". Her playing becomes more intense, arms moving with more expression.
+
+Close-up but slightly wider shot showing her upper body and the piano. Camera pulls back slowly to reveal more of the cathedral interior — stained glass windows high above, muted purple and deep red light filtering down onto the floor and piano.
+
+Her eyes now open, looking down at the keys with emotional intensity. Mouth slightly open, breathing with the music. Sweat glistening on her forehead from the emotional performance.
+
+Lighting: mix of cool blue side light and warm colors from the stained glass. Dramatic chiaroscuro, deep shadows, highlights on her purple hair and pale skin.
+
+Camera movement: slow pull back combined with a gentle rise, revealing the vaulted ceiling and the scale of the cathedral. Handheld feel but steady.
+
+Ultra realistic texture, detailed fabric of her black outfit, piano wood grain visible, atmospheric dust motes in the light beams.
+
+No talking, no singing. Pure musical expression.
+
+Duration: ~8 seconds.
+Format: Vertical 9:16, no audio.`,
+                    metadata: {
+                        postTitle: "Taking Over Me - Evanescence (piano cover) #jhenn",
+                        hashtags: "#jhenn #evanescence #takingoverme #piano #metal #fyp"
+                    }
+                }
+            ]
+        };
+
+        const sortedDays = Object.keys(promptsByDay).sort((a, b) => new Date(b) - new Date(a));
+        function formatDate(dateStr) {
+            const [y, m, d] = dateStr.split('-');
+            return `${d}/${m}/${y}`;
+        }
+
+        const container = document.getElementById('daysContainer');
+        sortedDays.forEach(day => {
+            const daySection = document.createElement('div');
+            daySection.className = 'day-section';
+            
+            const header = document.createElement('div');
+            header.className = 'day-header';
+            header.textContent = formatDate(day);
+            daySection.appendChild(header);
+            
+            const grid = document.createElement('div');
+            grid.className = 'prompt-grid';
+            
+            promptsByDay[day].forEach(prompt => {
+                const card = document.createElement('div');
+                card.className = 'prompt-card';
+                card.onclick = () => openModal(prompt);
+                card.innerHTML = `
+                    <div class="prompt-title">${prompt.title}</div>
+                    <div class="prompt-meta">
+                        ${prompt.tags.map(t => `<span class="tag">${t}</span>`).join(' ')}
+                    </div>
+                    <div class="prompt-preview">${prompt.preview}</div>
+                    <div class="read-more">Ler completo &rarr;</div>
+                `;
+                grid.appendChild(card);
+            });
+            
+            daySection.appendChild(grid);
+            container.appendChild(daySection);
+        });
+
+        let currentPrompt = null;
+
+        function openModal(prompt) {
+            currentPrompt = prompt;
+            document.getElementById('modalTitle').textContent = prompt.title;
+            document.getElementById('modalPostTitle').textContent = prompt.metadata.postTitle;
+            document.getElementById('modalHashtags').textContent = prompt.metadata.hashtags;
+            document.getElementById('modalBody').textContent = prompt.content;
+            document.getElementById('promptModal').style.display = 'block';
+        }
+
+        function copyPostInfo() {
+            if (!currentPrompt) return;
+            const text = currentPrompt.metadata.postTitle + '\n' + currentPrompt.metadata.hashtags;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('📋 Legenda e hashtags copiadas!');
+            }).catch(err => {
+                console.error('Copy failed:', err);
+            });
+        }
+
+        function closeModal() {
+            document.getElementById('promptModal').style.display = 'none';
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        document.getElementById('promptModal').addEventListener('click', (e) => {
+            if (e.target.id === 'promptModal') closeModal();
+        });
+    </script>
+</body>
+</html>
