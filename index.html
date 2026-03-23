@@ -112,75 +112,6 @@
             margin-top: 10px;
             display: inline-block;
         }
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9);
-            z-index: 1000;
-            padding: 20px;
-            overflow-y: auto;
-        }
-        .modal-content {
-            background: #1a1a2e;
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 15px;
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 30px;
-            position: relative;
-        }
-        .close-modal {
-            position: absolute;
-            top: 15px; right: 20px;
-            font-size: 2em;
-            color: #888;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        .close-modal:hover { color: #ff6b9d; }
-        .modal h2 {
-            color: #ff6b9d;
-            margin-bottom: 20px;
-            font-size: 1.8em;
-        }
-        .modal-meta {
-            background: rgba(255,107,157,0.1);
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 25px;
-            border-left: 4px solid #ff6b9d;
-        }
-        .modal-meta h3 {
-            color: #ff6b9d;
-            margin-bottom: 10px;
-            font-size: 1.1em;
-        }
-        .modal-meta p {
-            margin: 5px 0;
-            color: #ffb3c6;
-            font-size: 1.05em;
-        }
-        .modal-body {
-            line-height: 1.8;
-            color: #d0d0d0;
-            white-space: pre-wrap;
-            font-family: 'Consolas', monospace;
-            background: rgba(0,0,0,0.3);
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid rgba(255,255,255,0.05);
-            max-height: 60vh;
-            overflow-y: auto;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: #666;
-            font-size: 0.9em;
-            margin-top: 40px;
-        }
         .tag {
             display: inline-block;
             background: rgba(255,107,157,0.2);
@@ -190,20 +121,6 @@
             font-size: 0.8em;
             margin-right: 5px;
             margin-bottom: 5px;
-        }
-        .copy-btn {
-            background: rgba(255,107,157,0.2);
-            color: #ff6b9d;
-            border: 1px solid rgba(255,107,157,0.4);
-            padding: 8px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.9em;
-            margin-top: 10px;
-            transition: all 0.2s;
-        }
-        .copy-btn:hover {
-            background: rgba(255,107,157,0.3);
         }
     </style>
 </head>
@@ -215,87 +132,16 @@
         </header>
 
         <div class="day-section" id="daysContainer"></div>
-
-        <footer>
-            <p>Use os prompts no VEO3 ou CapCut. Formato: 9:16, 8s cada.</p>
-        </footer>
-    </div>
-
-    <div class="modal" id="promptModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h2 id="modalTitle"></h2>
-            <div class="modal-meta">
-                <h3>📱 Post Info</h3>
-                <p><strong>Legenda sugerida:</strong> <span id="modalPostTitle"></span></p>
-                <div style="margin-top: 8px;"><strong>Hashtags:</strong> <span id="modalHashtags"></span></div>
-                <button class="copy-btn" onclick="copyPostInfo()">📋 Copiar legenda + hashtags</button>
-            </div>
-            <div class="modal-body" id="modalBody"></div>
-        </div>
     </div>
 
     <script>
         const promptsByDay = {
             "2026-03-23": [
                 {
-                    id: 'bring_me_to_life_1',
-                    title: 'Bring Me To Life - Prompt 1 (Intro)',
-                    tags: ['Evanescence', 'Bring Me To Life', 'Piano Cover', 'Top Recommendation'],
-                    preview: 'Gothic pianist Jhenn in a candlelit cathedral, playing the iconic piano intro of "Bring Me To Life"... Close-up of hands on black grand piano...',
-                    content: `## VEO3 Prompt - Bring Me To Life (Intro)
-
-A gothic dark fantasy female pianist named Jhenn, long dark purple hair tied back loosely, pale skin, subtle black lipstick and smoky eyeshadow, wearing a tight black long-sleeve top.
-
-Close-up of her hands on a black grand piano in a dark cathedral. The iconic arpeggiated intro of "Bring Me To Life" begins: her slender fingers glide smoothly over the ivory keys, creating that melancholic, ethereal melody. Candlelight flickers on the keys, casting warm highlights on black and white. Gothic stone arches visible in shallow depth-of-field background.
-
-Camera holds steady, focused on the hands, then slowly tilts up to reveal her face. Her eyes are closed, deeply immersed. Her expression is serene yet haunted. The candlelight catches a single tear forming at the corner of her eye.
-
-Lighting: predominantly warm candlelight, with a cool blue accent light from the side contouring her cheekbones and hands. High contrast, dramatic chiaroscuro. Dust motes float in the light beams.
-
-She takes a soft breath as the intro builds. No singing, no talking. Pure instrumental intimacy.
-
-Duration: ~8 seconds.
-Format: Vertical 9:16, no audio.
-Reference: My Immortal cover got 254k views — same vibe, different song.`,
-                    metadata: {
-                        postTitle: "Bring Me To Life - Evanescence (piano cover) 🖤 #jhenn",
-                        hashtags: "#jhenn #evanescence #bringmetolife #pianocover #gothicpiano #metal #fyp"
-                    }
-                },
-                {
-                    id: 'bring_me_to_life_2',
-                    title: 'Bring Me To Life - Prompt 2 (Build-up)',
-                    tags: ['Evanescence', 'Bring Me To Life', 'Piano Cover', 'Top Recommendation'],
-                    preview: 'Same setting, Jhenn plays the build-up section with increasing intensity... Camera pulls back to show her full upper body...',
-                    content: `## VEO3 Prompt - Bring Me To Life (Build-up)
-
-Same gothic dark fantasy female pianist Jhenn, now playing the build-up section of "Bring Me To Life". Her dynamics increase: she presses the keys with more weight, her arms move with greater expression.
-
-Close-up pulls back to show her upper body and the piano. The camera slowly circles her left side, revealing more of the cathedral interior: towering stone columns, vaulted ceilings, stained glass windows depicting dark gothic imagery. Muted purple and deep red light filters down onto the floor.
-
-Her eyes are open now, looking down at the keys with intense emotion. Her chest rises and falls with the passion of the performance. A few strands of dark purple hair fall across her face.
-
-Lighting: stronger cool blue from the side, contrasting with warm candlelight. The light plays across her pale skin and the polished black piano.
-
-Camera movement: slow circular dolly, combined with a gentle rise, creating a sense of building tension. Handheld feel but controlled.
-
-Ultra realistic details: texture of her black outfit, the wood grain of the piano, atmospheric dust in the light beams. Her black nails catch the light as they strike the keys.
-
-No talking, no singing. Let the music build.
-
-Duration: ~8 seconds.
-Format: Vertical 9:16, no audio.`,
-                    metadata: {
-                        postTitle: "Bring Me To Life - Evanescence (piano cover) 🖤 #jhenn",
-                        hashtags: "#jhenn #evanescence #bringmetolife #pianocover #gothicpiano #metal #fyp"
-                    }
-                },
-                {
                     id: 'someone_you_loved',
                     title: 'Someone You Loved - Lewis Capaldi Piano Cover',
-                    tags: ['Lewis Capaldi', 'Someone You Loved', 'Piano Cover', 'Alternative Option'],
-                    preview: 'Emotional piano cover of "Someone You Loved" in the same gothic cathedral setting... Close-up on Jhenn\'s face during the vocal line...',
+                    tags: ['Lewis Capaldi', 'Someone You Loved', 'Piano Cover', 'Escolha de Hoje'],
+                    preview: 'Emotional piano cover of "Someone You Loved" in gothic cathedral... Close-up on expressive face, tears, candlelight...',
                     content: `## VEO3 Prompt - Someone You Loved (Lewis Capaldi)
 
 Gothic dark fantasy female pianist Jhenn, long dark purple hair, pale skin, black lipstick, wearing a simple black turtleneck.
@@ -314,78 +160,13 @@ No actual singing — just the piano and her expressive face. Haunting.
 
 Duration: ~15 seconds (capture full emotional arc).
 Format: Vertical 9:16, no audio.
-Note: Highly recognizable melody — perfect for TikTok short form.`,
+Nota: Melodia altamente reconhecível — perfeita para TikTok.`,
                     metadata: {
                         postTitle: "Someone You Loved - Lewis Capaldi (piano cover) 🖤 #jhenn",
                         hashtags: "#jhenn #someonouloved #lewiscapaldi #pianocover #gothic #emotional #fyp"
                     }
-                },
-                {
-                    id: 'original_rainha_das_cinzas',
-                    title: 'Original: Rainha das Cinzas - Short Hook',
-                    tags: ['Original Music', 'Rainha das Cinzas', 'Gothic Piano', 'Shorts Format'],
-                    preview: 'Original composition "Rainha das Cinzas" - a haunting piano piece with Jhenn\'s signature gothic style... Fast cuts between piano hands and face...',
-                    content: `## VEO3 Prompt - Rainha das Cinzas (Original Hook)
-
-Gothic female composer Jhenn performing her original piece "Rainha das Cinzas" (Queen of Ashes). Fast-paced editing: 2-second clips alternating between:
-
-1. Close-up of her hands playing a dramatic minor-key motif on black grand piano.
-2. Close-up of her face in shadow, eyes closed, purple hair falling.
-3. Low-angle shot of her hands with candlelight reflecting off the keys.
-4. Extreme close-up of her black nails striking a low bass note.
-
-The piece structure: 
-- 0-2s: ominous low arpeggio (left hand), single high note repeating
-- 2-4s: melody enters (right hand), simple but memorable 4-note phrase
-- 4-6s: left hand becomes more active, building tension
-- 6-8s: final chord with pedal — she looks up, eyes glowing faintly in the candlelight
-
-Setting: dark cathedral or abandoned theater. Only candlelight and a few LED strips in deep purple. Smoke/fog at floor level.
-
-Performance: intense, minimal movement, fully committed. Let the music speak.
-
-No ambient sound — pure visual storytelling.
-
-Duration: 8 seconds total (hook only).
-Format: Vertical 9:16, no audio.
-Purpose: tease full track on streaming platforms.`,
-                    metadata: {
-                        postTitle: "Rainha das Cinzas - Original 🖤 #jhenn",
-                        hashtags: "#jhenn #originalmusic #gothicpiano #pianocomposer #rainhadascinzas #metalbr #fyp"
-                    }
-                },
-                {
-                    id: 'nemo_nightwish',
-                    title: 'Nemo - Nightwish Piano Cover (Short Version)',
-                    tags: ['Nightwish', 'Nemo', 'Symphonic Metal', 'Piano Cover'],
-                    preview: 'Epic symphonic metal ballad "Nemo" arranged for solo piano... The famous intro arpeggios in a candlelit cathedral...',
-                    content: `## VEO3 Prompt - Nemo (Nightwish) - Piano Cover
-
-Gothic female pianist Jhenn performing "Nemo" by Nightwish on a black grand piano in a dark cathedral. She wears a flowing black dress with subtle metallic accents.
-
-Close-up of her hands playing the iconic intro arpeggios. The pattern is precise, clean, each note resonating. Candlelight flickers on the keys, creating a warm glow. Gothic arches in the background are out of focus.
-
-Camera holds on hands for 4 seconds, then pulls back to show her upper body. She looks up from the keys as the main melody begins, eyes reflecting the candlelight.
-
-At the chorus climax (around 10 seconds in), her expression becomes more dramatic — she leans forward slightly, playing with more force. The camera circles her slowly, capturing the emotion.
-
-Lighting: dramatic chiaroscuro. Warm candlelight on her face and hands, cool blue rim light from the side. The contrast highlights her pale skin and dark hair.
-
-Halfway through, the camera tilts up to reveal a stained glass window above, depicting a lone figure in a dark landscape — thematic to the song's lyrics.
-
-No singing, just piano. The arrangement captures the melancholic beauty of the original.
-
-Duration: ~15 seconds (main hook).
-Format: Vertical 9:16, no audio.
-Context: Nightwish trending in config — capitalize on symphonic metal audience.`,
-                    metadata: {
-                        postTitle: "Nemo - Nightwish (piano cover) 🖤 #jhenn",
-                        hashtags: "#jhenn #nightwish #nemo #symphonicmetal #pianocover #metal #fyp"
-                    }
                 }
-            ],
-            "2026-03-22": [],
-            "2026-03-21": []
+            ]
         };
 
         const sortedDays = Object.keys(promptsByDay).sort((a, b) => new Date(b) - new Date(a));
@@ -410,53 +191,18 @@ Context: Nightwish trending in config — capitalize on symphonic metal audience
             promptsByDay[day].forEach(prompt => {
                 const card = document.createElement('div');
                 card.className = 'prompt-card';
-                card.onclick = () => openModal(prompt);
                 card.innerHTML = `
                     <div class="prompt-title">${prompt.title}</div>
                     <div class="prompt-meta">
                         ${prompt.tags.map(t => `<span class="tag">${t}</span>`).join(' ')}
                     </div>
                     <div class="prompt-preview">${prompt.preview}</div>
-                    <div class="read-more">Ler completo &rarr;</div>
                 `;
                 grid.appendChild(card);
             });
             
             daySection.appendChild(grid);
             container.appendChild(daySection);
-        });
-
-        let currentPrompt = null;
-
-        function openModal(prompt) {
-            currentPrompt = prompt;
-            document.getElementById('modalTitle').textContent = prompt.title;
-            document.getElementById('modalPostTitle').textContent = prompt.metadata.postTitle;
-            document.getElementById('modalHashtags').textContent = prompt.metadata.hashtags;
-            document.getElementById('modalBody').textContent = prompt.content;
-            document.getElementById('promptModal').style.display = 'block';
-        }
-
-        function copyPostInfo() {
-            if (!currentPrompt) return;
-            const text = currentPrompt.metadata.postTitle + '\n' + currentPrompt.metadata.hashtags;
-            navigator.clipboard.writeText(text).then(() => {
-                alert('📋 Legenda e hashtags copiadas!');
-            }).catch(err => {
-                console.error('Copy failed:', err);
-            });
-        }
-
-        function closeModal() {
-            document.getElementById('promptModal').style.display = 'none';
-        }
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeModal();
-        });
-
-        document.getElementById('promptModal').addEventListener('click', (e) => {
-            if (e.target.id === 'promptModal') closeModal();
         });
     </script>
 </body>
