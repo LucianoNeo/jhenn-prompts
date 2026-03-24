@@ -208,6 +208,21 @@
             margin-right: 5px;
             margin-bottom: 5px;
         }
+        #textEditContainer {
+            background: rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        #textEditContainer h3 {
+            color: #ff6b9d;
+            margin-bottom: 10px;
+        }
+        .text-edit-item {
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
@@ -270,7 +285,25 @@ Duration: EXACTLY 8 seconds.`,
                         hashtags: "#epica #consigntooblivoin #symphonicmetal #pianocover #gothic #metalcover #tiktokmetal #jhenn_oficial",
                         tiktok_time: "19:30",
                         scene: "Victorian library at midnight, candles, ancient books, floating sheet music"
-                    }
+                    },
+                    textEdits: [
+                        {
+                            position: "top",
+                            start: 0,
+                            end: 3,
+                            duration: 3,
+                            text: "Epica - Consign to Oblivion",
+                            style: "Fonte Gothic, tamanho 45px, cor branca #FFFFFF, sombra preta suave (offset 2px, blur 3px)"
+                        },
+                        {
+                            position: "bottom",
+                            start: 6,
+                            end: 8,
+                            duration: 2,
+                            text: "Siga para mais 🖤",
+                            style: "Fonte Gothic, tamanho 35px, cor cinza claro #C0C0C0"
+                        }
+                    ]
                 },
                 {
                     id: 'epica_consign_2',
@@ -293,7 +326,25 @@ Duration: EXACTLY 4 seconds.`,
                         hashtags: "#epica #consigntooblivoin #symphonicmetal #pianocover #gothic #metalcover #tiktokmetal #jhenn_oficial",
                         tiktok_time: "19:30",
                         scene: "Victorian library at midnight, ghostly orchestra appears, magical climax"
-                    }
+                    },
+                    textEdits: [
+                        {
+                            position: "top",
+                            start: 0,
+                            end: 4,
+                            duration: 4,
+                            text: "Epica - Consign to Oblivion (Final)",
+                            style: "Fonte Gothic, tamanho 45px, cor branca #FFFFFF, sombra preta suave (offset 2px, blur 3px)"
+                        },
+                        {
+                            position: "bottom",
+                            start: 2,
+                            end: 4,
+                            duration: 2,
+                            text: "Parte 1/2 completa no perfil 🔗",
+                            style: "Fonte Gothic, tamanho 30px, cor cinza claro #C0C0C0"
+                        }
+                    ]
                 }
             ],
             "2026-03-23": [
@@ -328,7 +379,33 @@ This is PART 1 of 2.`,
                         hashtags: "#jhenn #someonouloved #lewiscapaldi #pianocover #gothic #emotional #fyp",
                         tiktok_time: "19:30",
                         scene: "Modern outdoor night environment, subtle distant lights blurred in the background"
-                    }
+                    },
+                    textEdits: [
+                        {
+                            position: "top",
+                            start: 0,
+                            end: 4,
+                            duration: 4,
+                            text: "Lewis Capaldi - Someone You Loved",
+                            style: "Fonte Gothic, tamanho 45px, cor branca #FFFFFF, sombra preta suave (offset 2px, blur 3px)"
+                        },
+                        {
+                            position: "center",
+                            start: 0,
+                            end: 3,
+                            duration: 3,
+                            text: "Piano Cover",
+                            style: "Fonte Gothic, tamanho 35px, cor cinza claro #C0C0C0"
+                        },
+                        {
+                            position: "bottom",
+                            start: 6,
+                            end: 8,
+                            duration: 2,
+                            text: "Parte 2 em breve 🔥",
+                            style: "Fonte Gothic, tamanho 35px, cor rosa claro #FFB3C6"
+                        }
+                    ]
                 },
                 {
                     id: 'someone_you_loved_2',
@@ -359,7 +436,25 @@ This is PART 2 of 2.`,
                         hashtags: "#jhenn #someonouloved #lewiscapaldi #pianocover #gothic #emotional #fyp",
                         tiktok_time: "19:30",
                         scene: "Modern outdoor night environment, subtle distant lights blurred in the background"
-                    }
+                    },
+                    textEdits: [
+                        {
+                            position: "top",
+                            start: 0,
+                            end: 4,
+                            duration: 4,
+                            text: "Lewis Capaldi - Someone You Loved (Final)",
+                            style: "Fonte Gothic, tamanho 45px, cor branca #FFFFFF, sombra preta suave (offset 2px, blur 3px)"
+                        },
+                        {
+                            position: "bottom",
+                            start: 2,
+                            end: 8,
+                            duration: 6,
+                            text: "Parte 1 no perfil 🔗",
+                            style: "Fonte Gothic, tamanho 30px, cor cinza claro #C0C0C0"
+                        }
+                    ]
                 }
             ]
         };
@@ -424,6 +519,25 @@ This is PART 2 of 2.`,
             const sceneEl = document.getElementById('modalScene');
             if (sceneEl) sceneEl.textContent = prompt.metadata.scene || 'Gothic cathedral, candlelight';
             document.getElementById('modalBody').textContent = prompt.content;
+
+            // Text Editing Section
+            const textEditContainer = document.getElementById('textEditContainer');
+            if (prompt.textEdits && prompt.textEdits.length > 0) {
+                let html = '<h3>✏️ Edição de Texto (CapCut)</h3><p>Timestamps em segundos. Adicione estes textos no CapCut conforme os tempos:</p>';
+                prompt.textEdits.forEach((edit, idx) => {
+                    html += `
+                        <div class="text-edit-item" style="background:rgba(255,107,157,0.1); padding:12px; margin:8px 0; border-radius:8px; border-left:3px solid #ff6b9d;">
+                            <strong>${idx + 1}. ${edit.position.toUpperCase()}</strong><br>
+                            ⏱️ <strong>Timing:</strong> ${edit.start}s - ${edit.end}s (duração: ${edit.duration}s)<br>
+                            📝 <strong>Texto:</strong> "${edit.text}"<br>
+                            🎨 <strong>Estilo:</strong> ${edit.style || 'Fonte gótica, cinza claro, sombra suave'}
+                        </div>`;
+                });
+                textEditContainer.innerHTML = html;
+            } else {
+                textEditContainer.innerHTML = '<p><em>Nenhuma especificação de texto definida para este prompt.</em></p>';
+            }
+
             document.getElementById('promptModal').style.display = 'block';
         }
 
