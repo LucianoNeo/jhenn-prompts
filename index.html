@@ -1,269 +1,4 @@
-﻿<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jhenn - Prompts VEO3</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
-            color: #e0e0e0;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        header {
-            text-align: center;
-            padding: 40px 20px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 15px;
-            margin-bottom: 30px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        h1 {
-            font-size: 2.5em;
-            color: #ff6b9d;
-            text-shadow: 0 0 20px rgba(255,107,157,0.5);
-            margin-bottom: 10px;
-        }
-        .subtitle {
-            color: #a0a0a0;
-            font-size: 1.1em;
-        }
-        .day-section {
-            margin-bottom: 50px;
-        }
-        .day-header {
-            color: #c44dff;
-            font-size: 1.8em;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid rgba(196,77,255,0.3);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .day-header::before {
-            content: 'ðŸ“…';
-        }
-        .prompt-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 20px;
-        }
-        .prompt-card {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
-            padding: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .prompt-card:hover {
-            transform: translateY(-5px);
-            border-color: #ff6b9d;
-            box-shadow: 0 10px 30px rgba(255,107,157,0.2);
-        }
-        .prompt-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 4px; height: 100%;
-            background: linear-gradient(to bottom, #ff6b9d, #c44dff);
-        }
-        .prompt-title {
-            color: #ff6b9d;
-            font-size: 1.3em;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-        .prompt-meta {
-            color: #888;
-            font-size: 0.9em;
-            margin-bottom: 10px;
-        }
-        .prompt-meta .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-bottom: 4px;
-            font-size: 0.85em;
-        }
-        .prompt-meta .meta-icon {
-            font-size: 1.1em;
-        }
-        .prompt-preview {
-            color: #ccc;
-            line-height: 1.6;
-            max-height: 120px;
-            overflow: hidden;
-            position: relative;
-        }
-        .prompt-preview::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 50px;
-            background: linear-gradient(transparent, rgba(26,26,46,0.9));
-        }
-        .read-more {
-            color: #ff6b9d;
-            font-weight: 600;
-            margin-top: 10px;
-            display: inline-block;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9);
-            z-index: 1000;
-            padding: 20px;
-            overflow-y: auto;
-        }
-        .modal-content {
-            background: #1a1a2e;
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 15px;
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 30px;
-            position: relative;
-        }
-        .close-modal {
-            position: absolute;
-            top: 15px; right: 20px;
-            font-size: 2em;
-            color: #888;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        .close-modal:hover { color: #ff6b9d; }
-        .modal h2 {
-            color: #ff6b9d;
-            margin-bottom: 20px;
-            font-size: 1.8em;
-        }
-        .modal-meta {
-            background: rgba(255,107,157,0.1);
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 25px;
-            border-left: 4px solid #ff6b9d;
-        }
-        .modal-meta h3 {
-            color: #ff6b9d;
-            margin-bottom: 10px;
-            font-size: 1.1em;
-        }
-        .modal-meta p {
-            margin: 5px 0;
-            color: #ffb3c6;
-            font-size: 1.05em;
-        }
-        .modal-body {
-            line-height: 1.8;
-            color: #d0d0d0;
-            white-space: pre-wrap;
-            font-family: 'Consolas', monospace;
-            background: rgba(0,0,0,0.3);
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid rgba(255,255,255,0.05);
-            max-height: 60vh;
-            overflow-y: auto;
-        }
-        .copy-btn {
-            background: rgba(255,107,157,0.2);
-            color: #ff6b9d;
-            border: 1px solid rgba(255,107,157,0.4);
-            padding: 8px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.9em;
-            margin-top: 10px;
-            transition: all 0.2s;
-        }
-        .copy-btn:hover {
-            background: rgba(255,107,157,0.3);
-        }
-        .tag {
-            display: inline-block;
-            background: rgba(255,107,157,0.2);
-            color: #ff6b9d;
-            padding: 3px 10px;
-            border-radius: 12px;
-            font-size: 0.8em;
-            margin-right: 5px;
-            margin-bottom: 5px;
-        }
-        #textEditContainer {
-            background: rgba(0,0,0,0.2);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 8px;
-            padding: 15px;
-            margin: 15px 0;
-        }
-        #textEditContainer h3 {
-            color: #ff6b9d;
-            margin-bottom: 10px;
-        }
-        .text-edit-item {
-            font-size: 0.95em;
-            line-height: 1.6;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1>ðŸŽ¬ Jhenn - VEO3 Prompts</h1>
-            <p class="subtitle">Prompts cinematogrÃ¡ficos para vÃ­deos do TikTok</p>
-        </header>
-
-        <div class="day-section" id="daysContainer"></div>
-    </div>
-
-    <div class="modal" id="promptModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h2 id="modalTitle"></h2>
-            <div class="modal-meta">
-                <h3>ðŸ“± Post Info</h3>
-                <div class="meta-item">
-                    <span class="meta-icon">ðŸ•</span>
-                    <span><strong>TikTok:</strong> <span id="modalTikTokTime"></span> (horÃ¡rio recomendado)</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-icon">ðŸŽ¬</span>
-                    <span><strong>CenÃ¡rio:</strong> <span id="modalScene"></span></span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-icon">ðŸ“</span>
-                    <span><strong>Legenda:</strong> <span id="modalPostTitle"></span></span>
-                </div>
-                <div style="margin-top: 8px;"><strong>Hashtags:</strong> <span id="modalHashtags"></span></div>
-                <button class="copy-btn" onclick="copyPostInfo()">ðŸ“‹ Copiar legenda + hashtags</button>
-            </div>
-            <div class="modal-body" id="modalBody"></div>
-            <div id="textEditContainer"></div>
-        </div>
-    </div>
-
-    <script>
-        // Todos os prompts organizados por data (YYYY-MM-DD)
-        const promptsByDay = {
+﻿const promptsByDay = {
             "2026-03-24": [
                 {
                     id: 'epica_consign_1',
@@ -457,116 +192,39 @@ This is PART 2 of 2.`,
                     ]
                 }
             ]
-        };
-
-        const sortedDays = Object.keys(promptsByDay).sort((a, b) => new Date(b) - new Date(a));
-        function formatDate(dateStr) {
-            const [y, m, d] = dateStr.split('-');
-            return `${d}/${m}/${y}`;
+        ,
+,
+  "2026-03-25": [
+    {
+      "id": "pijama_tiktokshop_2503",
+      "title": "Pijama GÃ³tico - TikTok Shop (16s)",
+      "tags": ["TikTok Shop", "Pijama GÃ³tico", "Jhenn", "FYP", "RomÃ¢ntico"],
+      "preview": "VÃ­deo de 16s mostrando o pijama branco com coraÃ§Ãµes em cenÃ¡rio gÃ³tico. Modelo acordando, mostrando detalhes do tecido canelado e cordÃ£o preto. Conforto e estilo.",
+      "content": "## VEO3 Prompt - Pijama GÃ³tico TikTok Shop (16s)\n\nVertical 9:16, product video vibe. Jhenn, cover pianista gÃ³tica (morena, long black hair, dark makeup) OR modelo bronzeada loira rabo de cavalo (conforme imagem do produto). Ambiente: quarto com decoraÃ§Ã£o gÃ³tica (abajur de ferro, cortinas escuras) ou luz suave da manhÃ£ pela janela.\n\nEla veste pijama branco acetinado: top de alÃ§as finas + shorts com cordÃ£o preto na cintura. Tecido canelado (ribbed), pequenos coraÃ§Ãµes em preto e rosa claro. Caimento confortÃ¡vel e fluido.\n\nCena natural e descontraÃ­da:\n- 0-3s: Close no rosto ao acordar, mostrando alÃ§a do top\n- 3-6s: Caminha, mostra a calÃ§a com cordÃ£o e coraÃ§Ãµes\n- 6-10s: Close nos detalhes: textura canelada, coraÃ§Ãµes, brilho sutil do acetinado\n- 10-13s: Senta no sofÃ¡/varanda com livro, mostrando conforto\n- 13-16s: Olha pra cÃ¢mera: \"Esse pijama tÃ¡ muito amor! Link na bio!\" + piscada\n\nIluminaÃ§Ã£o: luz quente de abajur ou nascer do sol. Som ambiente: cafÃ© sendo preparado, nota de piano suave no final (C# menor). Estilo: autÃªntico, nÃ£o encenado, vibe Ã­ntima. Camera: handheld natural, shallow depth of field.\n\nDuration: EXACTLY 16 seconds.\nFormat: Vertical 9:16, no audio.",
+      "metadata": {
+        "postTitle": "Meu pijama gÃ³tico preferido â¤ï¸ðŸ–¤ #tiktokshop",
+        "hashtags": "#tiktokshop #jhenn #fyp #pijama #gothic #pajamas #conforto #estilo #romantic",
+        "tiktok_time": "19:30",
+        "scene": "Quarto gÃ³tico com abajur ou varanda ao amanhecer"
+      },
+      "textEdits": [
+        {
+          "position": "top",
+          "start": 0,
+          "end": 4,
+          "duration": 4,
+          "text": "Pijama GÃ³tico â¤ï¸",
+          "style": "Fonte Gothic, tamanho 55px, cor branca #FFFFFF, sombra preta suave"
+        },
+        {
+          "position": "bottom",
+          "start": 10,
+          "end": 16,
+          "duration": 6,
+          "text": "Link na bio! ðŸ›ï¸",
+          "style": "Fonte Gothic, tamanho 40px, cor rosa claro #FFB3C6"
         }
-
-        const container = document.getElementById('daysContainer');
-        let currentPrompt = null;
-
-        sortedDays.forEach(day => {
-            const daySection = document.createElement('div');
-            daySection.className = 'day-section';
-            
-            const header = document.createElement('div');
-            header.className = 'day-header';
-            header.textContent = formatDate(day);
-            daySection.appendChild(header);
-            
-            const grid = document.createElement('div');
-            grid.className = 'prompt-grid';
-            
-            promptsByDay[day].forEach(prompt => {
-                const card = document.createElement('div');
-                card.className = 'prompt-card';
-                card.onclick = () => openModal(prompt);
-                card.innerHTML = `
-                    <div class="prompt-title">${prompt.title}</div>
-                    <div class="prompt-meta">
-                        <div class="meta-item">
-                            <span class="meta-icon">ðŸ•</span>
-                            <span>TikTok: ${prompt.metadata.tiktok_time || '19:00-20:00'}</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-icon">ðŸŽ¬</span>
-                            <span>CenÃ¡rio: ${prompt.metadata.scene || 'Gothic cathedral'}</span>
-                        </div>
-                        <div>
-                            ${prompt.tags.map(t => `<span class="tag">${t}</span>`).join(' ')}
-                        </div>
-                    </div>
-                    <div class="prompt-preview">${prompt.preview}</div>
-                `;
-                grid.appendChild(card);
-            });
-            
-            daySection.appendChild(grid);
-            container.appendChild(daySection);
-        });
-
-        function openModal(prompt) {
-            currentPrompt = prompt;
-            document.getElementById('modalTitle').textContent = prompt.title;
-            document.getElementById('modalPostTitle').textContent = prompt.metadata.postTitle;
-            document.getElementById('modalHashtags').textContent = prompt.metadata.hashtags;
-            // Novos campos
-            const timeEl = document.getElementById('modalTikTokTime');
-            if (timeEl) timeEl.textContent = prompt.metadata.tiktok_time || '19:00-20:00 (padrÃ£o)';
-            const sceneEl = document.getElementById('modalScene');
-            if (sceneEl) sceneEl.textContent = prompt.metadata.scene || 'Gothic cathedral, candlelight';
-            document.getElementById('modalBody').textContent = prompt.content;
-
-            // Text Editing Section
-            const textEditContainer = document.getElementById('textEditContainer');
-            if (prompt.textEdits && prompt.textEdits.length > 0) {
-                let html = '<h3>âœï¸ EdiÃ§Ã£o de Texto (CapCut)</h3><p>Timestamps em segundos. Adicione estes textos no CapCut conforme os tempos:</p>';
-                prompt.textEdits.forEach((edit, idx) => {
-                    html += `
-                        <div class="text-edit-item" style="background:rgba(255,107,157,0.1); padding:12px; margin:8px 0; border-radius:8px; border-left:3px solid #ff6b9d;">
-                            <strong>${idx + 1}. ${edit.position.toUpperCase()}</strong><br>
-                            â±ï¸ <strong>Timing:</strong> ${edit.start}s - ${edit.end}s (duraÃ§Ã£o: ${edit.duration}s)<br>
-                            ðŸ“ <strong>Texto:</strong> "${edit.text}"<br>
-                            ðŸŽ¨ <strong>Estilo:</strong> ${edit.style || 'Fonte gÃ³tica, cinza claro, sombra suave'}
-                        </div>`;
-                });
-                textEditContainer.innerHTML = html;
-            } else {
-                textEditContainer.innerHTML = '<p><em>Nenhuma especificaÃ§Ã£o de texto definida para este prompt.</em></p>';
-            }
-
-            document.getElementById('promptModal').style.display = 'block';
-        }
-
-        function copyPostInfo() {
-            if (!currentPrompt) return;
-            const text = currentPrompt.metadata.postTitle + '\n' + currentPrompt.metadata.hashtags;
-            navigator.clipboard.writeText(text).then(() => {
-                alert('ðŸ“‹ Legenda e hashtags copiadas!');
-            }).catch(err => {
-                console.error('Copy failed:', err);
-            });
-        }
-
-        function closeModal() {
-            document.getElementById('promptModal').style.display = 'none';
-        }
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeModal();
-        });
-
-        document.getElementById('promptModal').addEventListener('click', (e) => {
-            if (e.target.id === 'promptModal') closeModal();
-        });
-    </script>
-</body>
-</html>
-
-
-
-
-
+      ]
+    }
+  ]
+};
