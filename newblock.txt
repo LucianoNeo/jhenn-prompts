@@ -1,0 +1,78 @@
+"2026-03-26": [
+                {
+                    id: 'never_enough_1',
+                    title: "Never Enough - Lindsey Stirling [Parte 1/2] (0-8s)",
+                    tags: ["Lindsey Stirling", "Never Enough", "Piano Cover", "8s", "Parte 1"],
+                    preview: "Parte 1 (0-8s): Close nas mãos em tom menor, acorde melancólico. Jhenn em estilo gótico. Construção emocional sutil.",
+                    content: `## VEO3 Prompt - Never Enough (Parte 1 de 2) — 8s
+
+Scene: A gothic dark fantasy female pianist named Jhenn, long dark purple hair, pale skin, minimal gothic makeup, wearing a simple black outfit. She is sitting at a piano placed next to a large window at night, city lights visible outside, blurred bokeh lights in the background.
+
+[0.0-2.0s] HOOK: Video starts immediately with close-up of hands playing a soft emotional piano melody. Minor key, melancholic.
+
+[2.0-8.0s] After 2 seconds, slight camera movement reveals part of the window and city lights behind her. Ambient lighting from the city and soft interior light. No candles, no fantasy elements. Camera handheld, slightly imperfect, natural movement like a real phone recording. Ultra realistic lighting, natural shadows, 4k. No talking, no singing. Vertical 9:16.
+
+Duration: EXACTLY 8 seconds.`,
+                    metadata: {
+                        postTitle: "Acho que nunca é o suficiente... 🖤 #Jhenn #PianoCover",
+                        hashtags: "#NeverEnough #LindseyStirling #SymphonicMetal #Gothic #Piano #Cover #FYP",
+                        tiktok_time: "20:30",
+                        scene: "Night, large window, city lights bokeh, handheld phone style"
+                    },
+                    textEdits: [
+                        {
+                            position: "top",
+                            start: 0,
+                            end: 3,
+                            duration: 3,
+                            text: "Never Enough - Lindsey Stirling",
+                            style: "Fonte Gothic, tamanho 45px, cor branca #FFFFFF, sombra preta suave (offset 2px, blur 3px)"
+                        },
+                        {
+                            position: "bottom",
+                            start: 6,
+                            end: 8,
+                            duration: 2,
+                            text: "Parte 2 em breve 🔥",
+                            style: "Fonte Gothic, tamanho 35px, cor cinza claro #C0C0C0"
+                        }
+                    ]
+                },
+                {
+                    id: 'never_enough_2',
+                    title: "Never Enough - Lindsey Stirling [Parte 2/2] (8-12s)",
+                    tags: ["Lindsey Stirling", "Never Enough", "Piano Cover", "4s", "Parte 2"],
+                    preview: "Parte 2 (8-12s): Camera closer to side profile. She looks down at keys, then lifts gaze toward window lights. Subtle wind in hair. Calm, introspective.",
+                    content: `## VEO3 Prompt - Never Enough (Parte 2 de 2) — 4s
+
+Continuation from Part 1.
+
+[0.0-4.0s] PAYOFF: Camera now closer to her side profile while she continues playing piano near the window. She looks down at the keys, then slightly lifts her gaze toward the window lights (not at the camera). Subtle wind moving hair slightly, calm and introspective expression. City lights in the background create depth and atmosphere. Camera slowly shifts angle, handheld feel. Natural ambient lighting, no dramatic effects. Ultra realistic, 4k. No talking. Vertical 9:16.
+
+Duration: EXACTLY 4 seconds.`,
+                    metadata: {
+                        postTitle: "Acho que nunca é o suficiente... 🖤 #Jhenn #PianoCover",
+                        hashtags: "#NeverEnough #LindseyStirling #SymphonicMetal #Gothic #Piano #Cover #FYP",
+                        tiktok_time: "20:30",
+                        scene: "Side profile near window, city lights, wind in hair, intimate"
+                    },
+                    textEdits: [
+                        {
+                            position: "top",
+                            start: 0,
+                            end: 2,
+                            duration: 2,
+                            text: "Never Enough (Final)",
+                            style: "Fonte Gothic, tamanho 45px, cor branca #FFFFFF, sombra preta suave (offset 2px, blur 3px)"
+                        },
+                        {
+                            position: "bottom",
+                            start: 2,
+                            end: 4,
+                            duration: 2,
+                            text: "Parte 1 no perfil 🔗",
+                            style: "Fonte Gothic, tamanho 30px, cor cinza claro #C0C0C0"
+                        }
+                    ]
+                }
+            ]
