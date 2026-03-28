@@ -649,6 +649,94 @@ Format: Vertical 9:16, No audio (instrumental only).`,
             ]
         };
 
+        // Nova data de hoje (2026-03-28) - Nothing Else Matters
+        promptsByDay["2026-03-28"] = [
+            {
+                id: 'metallica_ne_1_2803',
+                title: "Metallica - Nothing Else Matters (Piano Cover) [Parte 1/2] (0-8s)",
+                tags: ["Metallica", "Nothing Else Matters", "Piano Cover", "8s", "Parte 1"],
+                preview: "Campo gramado à tarde chuvosa. Jhenn sentada no piano, tocas melody suave e melancólica. Câmera fixa estilo celular casual.",
+                content: `## VEO3 Prompt - Metallica - Nothing Else Matters [Parte 1 de 2] — 8s
+
+### Música (0-8s):
+The iconic acoustic guitar arpeggio intro plays on piano (EADGBE tuning). Soft, gentle note arpeggios, then first gentle strum builds warmth. Begin the main verse: ...E7-A-D... gentle and intimate melody emerges, expressive and heartfelt.
+
+### Cena:
+A gothic dark fantasy woman named Jhenn, long dark purple hair slightly wet from light rain, pale skin, minimal gothic makeup, wearing a simple black outfit. She is sitting at a real upright piano placed in the middle of an open grassy field, distant mountains in the background under a cloudy sky.
+
+### Performance:
+Video starts with the camera slightly off-center and already recording, as if a phone was placed casually. Light rain is falling naturally, subtle droplets visible on the piano and her clothes. Wind gently moves her hair and the grass. She is already playing a soft emotional piano melody, hands moving naturally with perfect fingers.
+
+### Camera:
+Camera is fixed but imperfectly framed, like a real phone recording, slight shake and natural motion. Lighting is soft, overcast daylight, no dramatic effects, soft shadows only.
+
+### Technical:
+ultra realistic, natural imperfections, 4k resolution. No talking, no singing (piano only). Vertical 9:16 aspect ratio. Duration: EXACTLY 8 seconds.`,
+                metadata: {
+                    postTitle: "Metallica - Nothing Else Matters (Piano Cover) [Parte 1/2] 🎹 #jhenn",
+                    hashtags: "#metallica #nothingelsematters #pianocover #gothic #metal #piano #cover #fyp #symphonic #jhenn_oficial",
+                    tiktok_time: "19:30",
+                    scene: "Open grassy field at rain, purple hair, mountains in distance"
+                },
+                textEdits: [
+                    {
+                        position: "top",
+                        start: 0,
+                        end: 3,
+                        duration: 3,
+                        text: "Nothing Else Matters",
+                        style: "Fonte Gotica, tamanho 48px, cor branca #FFFFFF, sombra preta suave (offset 2px, blur 3px)"
+                    },
+                    {
+                        position: "bottom",
+                        start: 5,
+                        end: 8,
+                        duration: 3,
+                        text: "Parte 1/2 - Siga para mais 🖤",
+                        style: "Fonte Gotica, tamanho 35px, cor cinza claro #C0C0C0"
+                    }
+                ]
+            },
+            {
+                id: 'metallica_ne_2_2803',
+                title: "Metallica - Nothing Else Matters (Piano Cover) [Parte 2/2] (8-16s)",
+                tags: ["Metallica", "Nothing Else Matters", "Piano Cover", "8s", "Parte 2", "Chão emocional"],
+                preview: "Close nas mãos de Jhenn tocando piano, close no rosto contemplativo. Chão do campo continua gramado e chuvoso, montanhas desfocadas ao fundo.",
+                content: `## VEO3 Prompt - Metallica - Nothing Else Matters [Parte 2 de 2] — 8s
+
+### Música (8-16s total):
+The main melody continues with increasing emotional depth. The famous chorus strikes: ...D-C-Bm... always gentle, intimate, filled with emotion and reverence. The melody builds then softens, ending with the last lyrical notes fading into silence.
+
+### Cena:
+The same open grassy field with light rain, distant mountains in the background under a cloudy sky. Continuation from Part 1. Jhenn continues her powerful yet tender piano performance, her purple rain-slicked hair cascading naturally, subtle droplets still visible.
+
+### Performance:
+Camera now closer and slightly to the side, capturing her hands and part of her face while she continues playing. She looks down at the keys, calm and introspective, rain lightly touching her skin and hair. Wind continues moving her hair and clothes subtly. Background shows depth with blurred mountains and moving grass, beautiful bokeh effect.
+
+### Camera:
+Camera handheld with very subtle movement, natural and imperfect. Lighting remains soft and cloudy, consistent with the first shot, overcast daylight creating a melancholic mood.
+
+### Technical:
+ultra realistic, 4k resolution, natural imperfections. Maybe a text overlay says "This song saved me 💜" at the end. No talking, no singing, piano only. Vertical 9:16 aspect ratio. Duration: EXACTLY 8 seconds.`,
+                metadata: {
+                    postTitle: "Metallica - Nothing Else Matters (Piano Cover) [Parte 2/2] 🎹 #jhenn",
+                    hashtags: "#metallica #nothingelsematters #pianocover #gothic #metal #piano #cover #fyp #symphonic #jhenn",
+                    tiktok_time: "19:30",
+                    scene: "Close on hands & face, field background, lingering emotion"
+                },
+                textEdits: [
+                    {
+                        position: "bottom",
+                        start: 5,
+                        end: 8,
+                        duration: 3,
+                        text: "This song saved me 💜",
+                        style: "Fonte Gotica, tamanho 42px, cor rosa claro #FFB3C6, sombra preta suave"
+                    }
+                ]
+            }
+        ];
+
         const sortedDays = Object.keys(promptsByDay).sort((a, b) => new Date(b) - new Date(a));
         function formatDate(dateStr) {
             const [y, m, d] = dateStr.split('-');
