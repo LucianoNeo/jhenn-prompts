@@ -1,0 +1,80 @@
+{
+  "2026-03-30": [
+    {
+      "id": "nothing_else_matters_1",
+      "title": "Nothing Else Matters - Close Up (0-8s)",
+      "tags": [
+        "Metallica",
+        "Nothing Else Matters",
+        "Piano Cover",
+        "Gothic",
+        "8s",
+        "Parte 1"
+      ],
+      "preview": "Close da janela. Jhenn sentada ao piano, perna esquerda exposta pelo slit do vestido preto. Ângulo externo olhando pra dentro. Mão direita inicia melodia. Natural, íntimo.",
+      "content": "## VEO3 Prompt - Metallica - Nothing Else Matters (Parte 1/2) — 8s\n\nA gothic dark fantasy woman named Jhenn, long dark purple hair, pale skin, minimal gothic makeup. She is wearing a black dress with a HIGH SIDE SLIT that clearly exposes one leg while sitting. The dress is NOT long and closed, the slit is visible at all times, showing her thigh and part of her leg naturally.\n\nScene: ONLY ONE window in front of her, camera outside looking in. No second window, no reflections from other windows. Jhenn is sitting at a piano, her exposed leg visible due to the slit while she plays.\n\nMusic: Soft piano notes already playing. The iconic opening of Nothing Else Matters on piano. Melodic, melancholic yet powerful.\n\nCamera: Slow push-in towards the window, focusing on her hands and face. Natural movement.\n\nLighting: Natural daylight through the window, soft shadows, no cinematic effects.\n\nStyle: Ultra realistic, 4k, vertical 9:16.\n\nDuration: EXACTLY 8 seconds.",
+      "metadata": {
+        "postTitle": "Metallica - Nothing Else Matters (Piano Cover) 🎹 #jhenn",
+        "hashtags": "#metallica #nothingelsematters #pianocover #metalcover #gothic #gothgirl #darkfantasy #instrumental #jhenn #fyp",
+        "tiktok_time": "19:30",
+        "scene": "Window view, Jhenn at piano, high slit dress visible"
+      },
+      "textEdits": [
+        {
+          "position": "top",
+          "start": 0,
+          "end": 3,
+          "duration": 3,
+          "text": "Metallica",
+          "style": "Fonte Gothic, tamanho 45px, cor branca #FFFFFF, sombra preta suave (offset 2px, blur 3px)"
+        },
+        {
+          "position": "bottom",
+          "start": 5,
+          "end": 8,
+          "duration": 3,
+          "text": "Nothing Else Matters 🖤",
+          "style": "Fonte Gothic, tamanho 40px, cor cinza claro #C0C0C0"
+        }
+      ]
+    },
+    {
+      "id": "nothing_else_matters_2",
+      "title": "Nothing Else Matters - Side Angle (8-16s)",
+      "tags": [
+        "Metallica",
+        "Nothing Else Matters",
+        "Piano Cover",
+        "Gothic",
+        "8s",
+        "Parte 2"
+      ],
+      "preview": "Câmera dentro do quarto, ângulo lateral. Jhenn continua tocando, perna exposta. Natural, handheld. Clímax da melodia.",
+      "content": "## VEO3 Prompt - Metallica - Nothing Else Matters (Parte 2/2) — 8s\n\nSame gothic dark fantasy woman Jhenn, same setting. Camera is inside the room, slightly to the side. She continues playing piano.\n\nHer black dress has a HIGH SLIT and one leg remains visible throughout the shot. The leg is naturally positioned and visible while she plays.\n\nImportant: do not generate a long dress covering the legs. The slit must be clearly visible. One leg must remain exposed in frame.\n\nCamera: handheld, natural movement, slight sway.\n\nLighting: Soft indoor light from window, gentle shadows.\n\nMusic: Continuation of Nothing Else Matters piano cover, building to emotional peak.\n\nStyle: Ultra realistic, 4k, vertical 9:16.\n\nDuration: EXACTLY 8 seconds.",
+      "metadata": {
+        "postTitle": "Metallica - Nothing Else Matters (Final) 🎹 #jhenn",
+        "hashtags": "#metallica #nothingelsematters #pianocover #metalcover #gothic #gothgirl #darkfantasy #instrumental #jhenn #fyp",
+        "tiktok_time": "19:30",
+        "scene": "Inside room, side angle, leg visible, emotional climax"
+      },
+      "textEdits": [
+        {
+          "position": "top",
+          "start": 0,
+          "end": 4,
+          "duration": 4,
+          "text": "Metallica - Final",
+          "style": "Fonte Gothic, tamanho 45px, cor branca #FFFFFF, sombra preta suave (offset 2px, blur 3px)"
+        },
+        {
+          "position": "bottom",
+          "start": 4,
+          "end": 8,
+          "duration": 4,
+          "text": "Siga para mais covers 🖤",
+          "style": "Fonte Gothic, tamanho 40px, cor cinza claro #C0C0C0"
+        }
+      ]
+    }
+  ]
+}
